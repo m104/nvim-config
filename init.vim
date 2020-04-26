@@ -6,8 +6,29 @@ filetype plugin indent on
 " allow hidden buffers
 set hidden
 
+"" Plugins
+
+call plug#begin()
+
+" the indomitable NerdTree
+Plug 'scrooloose/nerdtree'
+
+" Ctrl-P file completion
+Plug 'ctrlpvim/ctrlp.vim'
+
+" language support
+Plug 'sheerun/vim-polyglot'
+
+" comments
+Plug 'tpope/vim-commentary'
+
+" color schemes
+Plug 'nanotech/jellybeans.vim' , {'as': 'jellybeans'}
+
+call plug#end()
+
 " lines of command-line (etc) history
-set history=100
+set history=1000
 " remember all of these between sessions, but only 10 search terms; also
 " remember info for 10 files, but never any on removable disks, don't remember
 " marks in files, don't rehighlight old search patterns, and only save up to
@@ -47,9 +68,6 @@ syn sync ccomment cComment minlines=30 maxlines=300
 "syn sync fromstart
 " use the OS clipboard
 set clipboard=unnamedplus
-" keep 2 lines and characters of context
-set so=2
-set siso=2
 " don't wrap long lines
 set nowrap
 " cursor position
@@ -65,11 +83,19 @@ set incsearch
 set hlsearch
 " show matches
 set showmatch
-" display 'invisible' characters
+" show 'invisible' characters
 set listchars=tab:>.,trail:-
 set list
+" show at least 1 line above/below the cursor
+set scrolloff=1
+" and at least 5 characters on either side
+set sidescrolloff=5
+" show last line of the file
+set display+=lastline
 " show line numbers
 set number
+" autoload file changes ('u' to cancel)
+set autoread
 
 "" Text Formatting
 
@@ -93,25 +119,10 @@ set whichwrap=h,l,~,[,]
 set foldmethod=indent
 " set the fold level high enough to not fold the whole program
 set foldlevel=20
-" backspace
+" backspace through lines, indentations
 set backspace=indent,eol,start
-
-"" Plugins
-
-call plug#begin()
-
-" the indomitable NerdTree
-Plug 'scrooloose/nerdtree'
-
-" Ctrl-P file completion
-Plug 'ctrlpvim/ctrlp.vim'
-
-" language support
-Plug 'sheerun/vim-polyglot'
-
-
-
-call plug#end()
+" don't consider octal when inc/dec-ing numbers
+set nrformats-=octal
 
 "" Key Mappings
 
@@ -136,12 +147,12 @@ map <silent> <Leader>n :NERDTreeToggle<CR>
 map <silent> <Leader>f :NERDTreeFind<CR>
 map <silent> <Leader>t :CtrlPTag<CR>
 
-"" UI
-
-colorscheme industry
-
 "" Additional settings
 
 " ignore some file types
 let NERDTreeIgnore = ['\.pyc$']
+
+"" UI
+
+colorscheme jellybeans
 
