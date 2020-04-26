@@ -1,5 +1,7 @@
 " modernize vim
 set nocompatible
+" ensure utf-8 encoding
+set encoding=utf-8
 
 " enable filetype detection
 filetype plugin indent on
@@ -19,8 +21,15 @@ Plug 'ctrlpvim/ctrlp.vim'
 " language support
 Plug 'sheerun/vim-polyglot'
 
-" comments
+" text editing
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+
+" SCM/project support
+Plug 'tpope/vim-fugitive'
+
+" utilities
+Plug 'milkypostman/vim-togglelist'
 
 " color schemes
 Plug 'nanotech/jellybeans.vim' , {'as': 'jellybeans'}
