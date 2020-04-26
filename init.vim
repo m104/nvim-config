@@ -15,7 +15,7 @@ set history=100
 " but it causes an error for me
 set viminfo=/10,'10,r/Volumes,f0,h,\"100
 
-" User Interface
+"" User Interface
 
 " dark background, by default
 set background=dark
@@ -38,13 +38,15 @@ set shortmess+=r
 " have further <Tab>s cycle through the possibilities
 set wildmode=list:longest,full
 
-" Text Editing Display
+"" Text Editing Display
 
 " have syntax highlighting in terminals which can display colours:
 syntax on
 " faster or more accurate syntax highlighting
 syn sync ccomment cComment minlines=30 maxlines=300
 "syn sync fromstart
+" use the OS clipboard
+set clipboard=unnamedplus
 " keep 2 lines and characters of context
 set so=2
 set siso=2
@@ -69,7 +71,7 @@ set list
 " show line numbers
 set number
 
-" Text Formatting
+"" Text Formatting
 
 " indents with 2 spaces and smart indenting
 set tabstop=2
@@ -94,7 +96,27 @@ set foldlevel=20
 " backspace
 set backspace=indent,eol,start
 
-" Key Mappings
+"" Plugins
+
+call plug#begin()
+
+" the indomitable NerdTree
+Plug 'scrooloose/nerdtree'
+
+" Ctrl-P file completion
+Plug 'ctrlpvim/ctrlp.vim'
+
+" language support
+Plug 'sheerun/vim-polyglot'
+
+
+
+call plug#end()
+
+"" Key Mappings
+
+" quick Esc
+imap <C-K> <Esc>
 
 " cycle through buffers/files
 nnoremap <silent> <C-N> :bn<CR>
@@ -110,8 +132,16 @@ map <silent> <Leader>i /\<\(TODO\\|FIXME\\|BUG\\|DEBUG\\|XXX\\|HACK\\|NOTE\)\><C
 map <silent> <Leader>m /^[<=>]\{7\}<CR>
 
 " quick plugin toggling
-"map <silent> <Leader>n :NERDTreeToggle<CR>
-"map <silent> <Leader>f :NERDTreeFind<CR>
-"map <silent> <Leader>o :TagbarOpenAutoClose<CR>
-"map <silent> <Leader>t :CtrlPTag<CR>
+map <silent> <Leader>n :NERDTreeToggle<CR>
+map <silent> <Leader>f :NERDTreeFind<CR>
+map <silent> <Leader>t :CtrlPTag<CR>
+
+"" UI
+
+colorscheme industry
+
+"" Additional settings
+
+" ignore some file types
+let NERDTreeIgnore = ['\.pyc$']
 
