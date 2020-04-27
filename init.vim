@@ -8,14 +8,25 @@ filetype plugin indent on
 " allow hidden buffers
 set hidden
 
+" determine the full nvim config path
+let s:configdir = expand('%:p:h')
+
+" rebuild spelling files
+for textfile in glob(s:configdir . '/spell/*.add', 1, 1)
+  let s:spellfile = textfile . '.spl'
+  if filereadable(textfile) && (!filereadable(s:spellfile) || getftime(textfile) > getftime(s:spellfile))
+    echomsg 'Rebuilding spelling file ' . s:spellfile
+    exec 'silent mkspell! ' . fnameescape(textfile)
+  endif
+endfor
+
 "" Plugins
 
 call plug#begin()
 
-" the indomitable NerdTree
+" Project/file/SCM support
 Plug 'scrooloose/nerdtree'
-
-" Ctrl-P file completion
+Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " language support
@@ -24,9 +35,6 @@ Plug 'sheerun/vim-polyglot'
 " text editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-
-" SCM/project support
-Plug 'tpope/vim-fugitive'
 
 " utilities
 Plug 'milkypostman/vim-togglelist'
@@ -60,7 +68,7 @@ set showmode
 set showcmd
 " default or informative status line
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-"set statusline=%<%f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c%V\ %)%P
+set statusline=%<%f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c%V\ %)%P
 " use '[RO]' for '[readonly]' to save space in the message line
 set shortmess+=r
 " have command-line completion <Tab> (for filenames, help topics, option names)
@@ -123,7 +131,7 @@ set textwidth=80
 " have the h and l cursor keys wrap between lines (like <Space> and <BkSpc> do
 " by default), and ~ covert case over line breaks; also have the cursor keys
 " wrap in insert mode
-set whichwrap=h,l,~,[,]
+set whichwrap+=h,l,~,[,]
 " turn on programmaticly syntactical folds
 set foldmethod=indent
 " set the fold level high enough to not fold the whole program
@@ -136,25 +144,28 @@ set nrformats-=octal
 "" Key Mappings
 
 " quick Esc
-imap <C-K> <Esc>
+noremap <C-K> <Esc>
 
 " cycle through buffers/files
 nnoremap <silent> <C-N> :bn<CR>
 nnoremap <silent> <C-B> :bp<CR>
 
+" show all buffers
+nnoremap <silent> <Leader>b :buffers<CR>
+
 " toggle spell checking
 nnoremap <silent> <Leader>s :set invspell<CR>
 
 " search for points of interest
-map <silent> <Leader>i /\<\(TODO\\|FIXME\\|BUG\\|DEBUG\\|XXX\\|HACK\\|NOTE\)\><CR>
+nnoremap <silent> <Leader>i /\<\(TODO\\|FIXME\\|BUG\\|DEBUG\\|XXX\\|HACK\\|NOTE\)\><CR>
 
 " search for git merge conflicts
-map <silent> <Leader>m /^[<=>]\{7\}<CR>
+nnoremap <silent> <Leader>m /^[<=>]\{7\}<CR>
 
 " quick plugin toggling
-map <silent> <Leader>n :NERDTreeToggle<CR>
-map <silent> <Leader>f :NERDTreeFind<CR>
-map <silent> <Leader>t :CtrlPTag<CR>
+nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>f :NERDTreeFind<CR>
+nnoremap <silent> <Leader>t :CtrlPTag<CR>
 
 "" Additional settings
 
@@ -163,5 +174,6 @@ let NERDTreeIgnore = ['\.pyc$']
 
 "" UI
 
+" enable 24-bit colot
+" set termguicolors
 colorscheme jellybeans
-
