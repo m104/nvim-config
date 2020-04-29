@@ -41,6 +41,10 @@ Plug 'milkypostman/vim-togglelist'
 
 " color schemes
 Plug 'nanotech/jellybeans.vim' , {'as': 'jellybeans'}
+Plug 'sjl/badwolf'
+Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'jacoborus/tender.vim', {'as': 'tender'}
 
 call plug#end()
 
@@ -174,6 +178,18 @@ let NERDTreeIgnore = ['\.pyc$']
 
 "" UI
 
-" enable 24-bit colot
-" set termguicolors
+" enable 24-bit color
+set termguicolors
+
+" colorscheme tender
+"
+" colorscheme rendered_day
+
+let g:jellybeans_use_lowcolor_black = 1
 colorscheme jellybeans
+
+" let g:gruvbox_contrast_dark = 'hard'
+" colorscheme gruvbox
+
+" colorscheme onehalfdark
+
