@@ -31,6 +31,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " language support
 Plug 'sheerun/vim-polyglot'
+"Plug 'm104/vim-checklist'
 
 " text editing
 Plug 'tpope/vim-commentary'
