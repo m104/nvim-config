@@ -31,7 +31,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " language support
 Plug 'sheerun/vim-polyglot'
-"Plug 'm104/vim-checklist'
+Plug 'm104/vim-checklist'
 
 " text editing
 Plug 'tpope/vim-commentary'
@@ -149,7 +149,7 @@ set nrformats-=octal
 "" Key Mappings
 
 " quick Esc
-noremap <C-K> <Esc>
+inoremap <C-J> <Esc>
 
 " cycle through buffers/files
 nnoremap <silent> <C-N> :bn<CR>
@@ -187,6 +187,11 @@ set termguicolors
 " colorscheme rendered_day
 
 let g:jellybeans_use_lowcolor_black = 1
+let g:jellybeans_overrides = {
+\    'Todo': { 'guifg': 'ffb964',
+\              'ctermfg': 'Yellow',
+\              'attr': 'bold' }
+\}
 colorscheme jellybeans
 
 " let g:gruvbox_contrast_dark = 'hard'
