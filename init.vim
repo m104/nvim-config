@@ -84,7 +84,8 @@ set showmode
 set showcmd
 " default or informative status line
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-set statusline=%<%f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%-16(\ %l,%c%V\ %)%P
+set statusline=%<%f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%b\ 0x%B%=%-16(\ %l,%c%V\ %)%P
+"%b\ 0x%B
 " use '[RO]' for '[readonly]' to save space in the message line
 set shortmess+=r
 " have command-line completion <Tab> (for filenames, help topics, option names)
