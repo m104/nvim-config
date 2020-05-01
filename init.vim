@@ -48,7 +48,7 @@ filetype plugin indent on
 set hidden
 
 " determine the full nvim config path
-let s:configdir = expand('%:p:h')
+let s:configdir = expand('<sfile>:p:h')
 
 " lines of command-line (etc) history
 set history=1000
