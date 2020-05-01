@@ -3,22 +3,6 @@ set nocompatible
 " ensure utf-8 encoding
 set encoding=utf-8
 
-" enable filetype detection
-filetype plugin indent on
-" allow hidden buffers
-set hidden
-
-" determine the full nvim config path
-let s:configdir = expand('%:p:h')
-
-" rebuild spelling files
-for textfile in glob(s:configdir . '/spell/*.add', 1, 1)
-  let s:spellfile = textfile . '.spl'
-  if filereadable(textfile) && (!filereadable(s:spellfile) || getftime(textfile) > getftime(s:spellfile))
-    echomsg 'Rebuilding spelling file ' . s:spellfile
-    exec 'silent mkspell! ' . fnameescape(textfile)
-  endif
-endfor
 
 "" Plugins
 
@@ -49,6 +33,23 @@ Plug 'jacoborus/tender.vim', {'as': 'tender'}
 
 call plug#end()
 
+
+"" Plugin Settings
+
+" ignore some file types
+let NERDTreeIgnore = ['\.pyc$']
+
+
+"" General Settings
+
+" enable filetype detection
+filetype plugin indent on
+" allow hidden buffers
+set hidden
+
+" determine the full nvim config path
+let s:configdir = expand('%:p:h')
+
 " lines of command-line (etc) history
 set history=1000
 " remember all of these between sessions, but only 10 search terms; also
@@ -57,6 +58,16 @@ set history=1000
 " 100 lines of registers; including @10 in there should restrict input buffer
 " but it causes an error for me
 set viminfo=/10,'10,r/Volumes,f0,h,\"100
+
+" rebuild spelling file(s)
+for textfile in glob(s:configdir . '/spell/*.add', 1, 1)
+  let s:spellfile = textfile . '.spl'
+  if filereadable(textfile) && (!filereadable(s:spellfile) || getftime(textfile) > getftime(s:spellfile))
+    echomsg 'Rebuilding spelling file: ' . s:spellfile
+    exec 'silent mkspell! ' . fnameescape(textfile)
+  endif
+endfor
+
 
 "" User Interface
 
@@ -80,6 +91,7 @@ set shortmess+=r
 " first list the available options and complete the longest common part, then
 " have further <Tab>s cycle through the possibilities
 set wildmode=list:longest,full
+
 
 "" Text Editing Display
 
@@ -119,6 +131,7 @@ set number
 " autoload file changes ('u' to cancel)
 set autoread
 
+
 "" Text Formatting
 
 " indents with 2 spaces and smart indenting
@@ -146,6 +159,7 @@ set backspace=indent,eol,start
 " don't consider octal when inc/dec-ing numbers
 set nrformats-=octal
 
+
 "" Key Mappings
 
 " quick Esc
@@ -172,30 +186,13 @@ nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>f :NERDTreeFind<CR>
 nnoremap <silent> <Leader>t :CtrlPTag<CR>
 
-"" Additional settings
 
-" ignore some file types
-let NERDTreeIgnore = ['\.pyc$']
+"" Host Settings
 
-"" UI
-
-" enable 24-bit color
-set termguicolors
-
-" colorscheme tender
-"
-" colorscheme rendered_day
-
-let g:jellybeans_use_lowcolor_black = 1
-let g:jellybeans_overrides = {
-\    'Todo': { 'guifg': 'ffb964',
-\              'ctermfg': 'Yellow',
-\              'attr': 'bold' }
-\}
-colorscheme jellybeans
-
-" let g:gruvbox_contrast_dark = 'hard'
-" colorscheme gruvbox
-
-" colorscheme onehalfdark
+let s:hostfile=s:configdir . '/local/' . hostname() . '.vim'
+if filereadable(s:hostfile)
+  execute 'source '. s:hostfile
+else
+  echomsg 'No host config file found: ' . s:hostfile
+endif
 
