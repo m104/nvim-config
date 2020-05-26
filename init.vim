@@ -187,6 +187,10 @@ nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>f :NERDTreeFind<CR>
 nnoremap <silent> <Leader>t :CtrlPTag<CR>
 
+" show syntax highligh group under cursor
+map <F10> :echo "0:" . synIDattr(synID(line("."),col("."),1),"name") . ', 1:'
+  \ . synIDattr(synID(line("."),col("."),0),"name") . ", 2:"
+  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ""<CR>
 
 "" Host Settings
 
