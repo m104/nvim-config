@@ -37,7 +37,7 @@ call plug#end()
 "" Plugin Settings
 
 " ignore some file types
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '^target$']
 
 
 "" General Settings
@@ -92,6 +92,8 @@ set shortmess+=r
 " first list the available options and complete the longest common part, then
 " have further <Tab>s cycle through the possibilities
 set wildmode=list:longest,full
+" ignore some files
+set wildignore=*/target/*
 
 
 "" Text Editing Display
