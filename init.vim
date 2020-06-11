@@ -16,6 +16,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 " language support
 Plug 'sheerun/vim-polyglot'
 Plug 'm104/vim-checklist'
+Plug 'psf/black', { 'tag': '19.10b0' }
 
 " text editing
 Plug 'tpope/vim-commentary'
@@ -193,6 +194,13 @@ nnoremap <silent> <Leader>t :CtrlPTag<CR>
 map <F10> :echo "0:" . synIDattr(synID(line("."),col("."),1),"name") . ', 1:'
   \ . synIDattr(synID(line("."),col("."),0),"name") . ", 2:"
   \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ""<CR>
+
+
+"" Automatic commands
+
+" run black formatter before saving python files
+autocmd BufWritePre *.py execute ':Black'
+
 
 "" Host Settings
 

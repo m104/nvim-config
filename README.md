@@ -14,4 +14,10 @@ git clone --recursive git@github.com:$GITUSER/nvim-config.git ~/.config/nvim
 nvim +PlugInstall +qall
 ```
 
+3. For python/black support:
+
+```sh
+pip3 install neovim
+```
+
 Enjoy!
