@@ -163,6 +163,9 @@ set backspace=indent,eol,start
 " don't consider octal when inc/dec-ing numbers
 set nrformats-=octal
 
+" black Python code formatter max line length
+let g:black_linelength=110
+
 
 "" Key Mappings
 
@@ -201,6 +204,9 @@ map <F10> :echo "0:" . synIDattr(synID(line("."),col("."),1),"name") . ', 1:'
 " run black formatter before saving python files
 autocmd BufWritePre *.py execute ':Black'
 
+" check for updates after the cursor has been inactive
+autocmd CursorHold * :checktime
+autocmd FocusGained * :checktime
 
 "" Host Settings
 
