@@ -12,6 +12,7 @@ call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-unimpaired'
 
 " language support
 Plug 'sheerun/vim-polyglot'
@@ -179,6 +180,10 @@ nnoremap <silent> <C-B> :bp<CR>
 " show all buffers
 nnoremap <silent> <Leader>b :buffers<CR>
 
+" cycle through quickfix entries
+nmap <silent> <M-n> ]q
+nmap <silent> <M-b> [q
+
 " toggle spell checking
 nnoremap <silent> <Leader>s :set invspell<CR>
 
@@ -207,6 +212,10 @@ autocmd BufWritePre *.py execute ':Black'
 " check for updates after the cursor has been inactive
 autocmd CursorHold * :checktime
 autocmd FocusGained * :checktime
+
+" clear CtrlP caches on startup
+autocmd VimEnter * :CtrlPClearCache
+
 
 "" Host Settings
 
