@@ -9,3 +9,9 @@ let g:jellybeans_overrides = {
 \}
 
 colorscheme jellybeans
+
+" black Python code formatter max line length
+let g:black_linelength=110
+
+" run black formatter before saving python files
+autocmd BufWritePre *.py execute ':Black'
