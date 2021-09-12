@@ -17,7 +17,7 @@ Plug 'tpope/vim-unimpaired'
 " language support
 Plug 'sheerun/vim-polyglot'
 Plug 'm104/vim-checklist'
-Plug 'psf/black', { 'tag': '19.10b0' }
+Plug 'psf/black'
 
 " text editing
 Plug 'tpope/vim-commentary'

@@ -17,7 +17,8 @@ nvim +PlugInstall +qall
 3. For python/black support:
 
 ```sh
-pip3 install neovim
+pip3 install --upgrade neovim
+pip3 install --upgrade git+https://github.com/psf/black.git
 ```
 
 Enjoy!
