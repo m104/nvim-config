@@ -214,8 +214,11 @@ autocmd VimEnter * :CtrlPClearCache
 "" Host Settings
 
 let s:hostfile=s:configdir . '/local/' . hostname() . '.vim'
+let s:localfile=s:configdir . '/local/local.vim'
 if filereadable(s:hostfile)
   execute 'source '. s:hostfile
+elseif filereadable(s:localfile)
+  execute 'source '. s:localfile
 else
   echomsg 'No host config file found: ' . s:hostfile
 endif
