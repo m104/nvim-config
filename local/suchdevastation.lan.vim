@@ -8,8 +8,8 @@ let g:jellybeans_overrides = {
 \              'attr': 'bold' }
 \}
 
-colorscheme jellybeans
-" colorscheme badwolf
+"colorscheme jellybeans
+colorscheme badwolf
 
 " black Python code formatter max line length
 let g:black_linelength=110
