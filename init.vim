@@ -18,6 +18,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
 Plug 'm104/vim-checklist'
 Plug 'psf/black'
+Plug 'sirtaj/vim-openscad'
 
 " text editing
 Plug 'tpope/vim-commentary'
