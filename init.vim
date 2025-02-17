@@ -12,7 +12,6 @@ call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-unimpaired'
 
 " language support
 Plug 'sheerun/vim-polyglot'
@@ -62,12 +61,11 @@ set completeopt-=preview
 let g:ale_linters = {
       \ 'clojure': ['clj-kondo']
       \}
-let g:ale_lint_text_changed = 1
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'clojure': ['cljfmt'],
       \}
-"let g:ale_fix_on_save = 0
+"let g:ale_fix_on_save = 1
 
 
 "" General Settings
