@@ -8,17 +8,17 @@
 git clone --recursive git@github.com:$GITUSER/nvim-config.git ~/.config/nvim
 ```
 
-2. Install the plugins:
+2. For python3/black support:
 
 ```sh
-nvim +PlugInstall +qall
+pip3 install --upgrade pynvim
+pip3 install --upgrade git+https://github.com/psf/black.git
 ```
 
-3. For python/black support:
+3. Install the plugins:
 
 ```sh
-pip3 install --upgrade neovim
-pip3 install --upgrade git+https://github.com/psf/black.git
+nvim +PlugInstall +UpdateRemotePlugins +qall
 ```
 
 Enjoy!

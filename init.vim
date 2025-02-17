@@ -19,10 +19,16 @@ Plug 'sheerun/vim-polyglot'
 Plug 'm104/vim-checklist'
 Plug 'psf/black'
 Plug 'sirtaj/vim-openscad'
+Plug 'Olical/conjure'
 
 " text editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'Shougo/deoplete.nvim'
+Plug 'ncm2/float-preview.nvim'
+Plug 'w0rp/ale'
 
 " utilities
 Plug 'milkypostman/vim-togglelist'
@@ -41,6 +47,27 @@ call plug#end()
 
 " ignore some file types
 let NERDTreeIgnore = ['\.pyc$', '^target$']
+
+" float preview updates
+let g:float_preview#docked = 0
+let g:float_preview#max_width = 80
+let g:float_preview#max_height = 40
+
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('keyword_patterns', {'clojure': '[\w!$%&*+/:<=>?@\^_~\-\.#]*'})
+set completeopt-=preview
+
+" Ale settings
+let g:ale_linters = {
+      \ 'clojure': ['clj-kondo']
+      \}
+let g:ale_lint_text_changed = 1
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'clojure': ['cljfmt'],
+      \}
+"let g:ale_fix_on_save = 0
 
 
 "" General Settings
@@ -167,6 +194,8 @@ set nrformats-=octal
 
 
 "" Key Mappings
+let mapleader="\\"
+let maplocalleader=","
 
 " quick Esc
 inoremap <C-J> <Esc>
@@ -223,4 +252,3 @@ elseif filereadable(s:localfile)
 else
   echomsg 'No host config file found: ' . s:hostfile
 endif
-
