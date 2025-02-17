@@ -8,29 +8,30 @@ set encoding=utf-8
 
 call plug#begin()
 
-" Project/file/SCM support
+" project/file/SCM support
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
 
-" language support
-Plug 'sheerun/vim-polyglot'
-Plug 'm104/vim-checklist'
-Plug 'psf/black'
-Plug 'sirtaj/vim-openscad'
-Plug 'Olical/conjure'
-
 " text editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
+"Plug 'guns/vim-sexp'
+"Plug 'tpope/vim-sexp-mappings-for-regular-people'
+
+" language support
+Plug 'sheerun/vim-polyglot'
+Plug 'm104/vim-checklist'
+Plug 'sirtaj/vim-openscad'
+
+" Python integration
+Plug 'psf/black'
+
+" Clojure/lisp integration
+Plug 'Olical/conjure'
 Plug 'Shougo/deoplete.nvim'
 Plug 'ncm2/float-preview.nvim'
 Plug 'w0rp/ale'
-
-" utilities
-Plug 'milkypostman/vim-togglelist'
 
 " color schemes
 Plug 'nanotech/jellybeans.vim' , {'as': 'jellybeans'}
@@ -65,7 +66,6 @@ let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'clojure': ['cljfmt'],
       \}
-"let g:ale_fix_on_save = 1
 
 
 "" General Settings
@@ -113,7 +113,6 @@ set showcmd
 " default or informative status line
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set statusline=%<%f\ %h%w%m%r%y%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=%b\ 0x%B%=%-16(\ %l,%c%V\ %)%P
-"%b\ 0x%B
 " use '[RO]' for '[readonly]' to save space in the message line
 set shortmess+=r
 " have command-line completion <Tab> (for filenames, help topics, option names)
@@ -161,6 +160,8 @@ set display+=lastline
 set number
 " autoload file changes ('u' to cancel)
 set autoread
+" update files every 750ms
+set updatetime=750
 
 
 "" Text Formatting
@@ -195,33 +196,26 @@ set nrformats-=octal
 let mapleader="\\"
 let maplocalleader=","
 
-" quick Esc
+" fast Esc
 inoremap <C-J> <Esc>
-
-" cycle through buffers/files
-nnoremap <silent> <C-N> :bn<CR>
-nnoremap <silent> <C-B> :bp<CR>
 
 " show all buffers
 nnoremap <silent> <Leader>b :buffers<CR>
-
-" cycle through quickfix entries
-nmap <silent> <M-n> ]q
-nmap <silent> <M-b> [q
+" cycle through buffers/files
+nnoremap <silent> <C-N> :bn<CR>
+nnoremap <silent> <C-B> :bp<CR>
 
 " toggle spell checking
 nnoremap <silent> <Leader>s :set invspell<CR>
 
 " search for points of interest
-nnoremap <silent> <Leader>i /\<\(TODO\\|FIXME\\|BUG\\|DEBUG\\|XXX\\|HACK\\|NOTE\)\><CR>
-
+nnoremap <silent> <Leader>hi /\<\(TODO\\|FIXME\\|BUG\\|DEBUG\\|XXX\\|HACK\\|NOTE\)\><CR>
 " search for git merge conflicts
-nnoremap <silent> <Leader>m /^[<=>]\{7\}<CR>
+nnoremap <silent> <Leader>hm /^[<=>]\{7\}<CR>
 
-" quick plugin toggling
+" file tree toggling
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>f :NERDTreeFind<CR>
-nnoremap <silent> <Leader>t :CtrlPTag<CR>
 
 " show syntax highligh group under cursor
 map <F10> :echo "0:" . synIDattr(synID(line("."),col("."),1),"name") . ', 1:'
@@ -232,8 +226,7 @@ map <F10> :echo "0:" . synIDattr(synID(line("."),col("."),1),"name") . ', 1:'
 "" Automatic commands
 
 " check for updates after the cursor has been inactive
-autocmd CursorHold * :checktime
-autocmd FocusGained * :checktime
+autocmd CursorHold,FocusGained * silent! checktime
 
 " clear CtrlP caches on startup
 autocmd VimEnter * :CtrlPClearCache
