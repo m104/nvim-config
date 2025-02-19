@@ -3,6 +3,8 @@ set nocompatible
 " ensure utf-8 encoding
 set encoding=utf-8
 
+let mapleader="\\"
+let maplocalleader=","
 
 "" Plugins
 
@@ -16,8 +18,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 " text editing
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-"Plug 'guns/vim-sexp'
-"Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " language support
 Plug 'sheerun/vim-polyglot'
@@ -26,6 +28,17 @@ Plug 'sirtaj/vim-openscad'
 
 " Python integration
 Plug 'psf/black'
+
+" Upcase conjure log (,l*) mappings to (,L*)
+let g:conjure#mapping#log_split = "Ls"
+let g:conjure#mapping#log_vsplit = "Lv"
+let g:conjure#mapping#log_tab = "Lt"
+let g:conjure#mapping#log_buf = "Le"
+let g:conjure#mapping#log_toggle = "Lg"
+let g:conjure#mapping#log_close_visible = "Lq"
+let g:conjure#mapping#log_reset_soft = "Lr"
+let g:conjure#mapping#log_reset_hard = "LR"
+let g:conjure#mapping#log_jump_to_latest = "Ll"
 
 " Clojure/lisp integration
 Plug 'Olical/conjure'
@@ -193,9 +206,6 @@ set nrformats-=octal
 
 
 "" Key Mappings
-let mapleader="\\"
-let maplocalleader=","
-
 " fast Esc
 inoremap <C-J> <Esc>
 
@@ -243,3 +253,4 @@ elseif filereadable(s:localfile)
 else
   echomsg 'No host config file found: ' . s:hostfile
 endif
+
