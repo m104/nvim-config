@@ -227,6 +227,9 @@ nnoremap <silent> <Leader>hm /^[<=>]\{7\}<CR>
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>f :NERDTreeFind<CR>
 
+" ALE formatting
+nnoremap <silent> <LocalLeader>f :ALEFix<CR>
+
 " show syntax highligh group under cursor
 map <F10> :echo "0:" . synIDattr(synID(line("."),col("."),1),"name") . ', 1:'
   \ . synIDattr(synID(line("."),col("."),0),"name") . ", 2:"
